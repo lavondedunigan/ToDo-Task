@@ -10,6 +10,7 @@ import SwiftUI
 struct TaskGroupDetailView: View {
     @Binding var groups: TaskGroup
     @Environment(\.horizontalSizeClass) var sizeClass
+    
     var body: some View {
         List {
             Section {
@@ -33,6 +34,7 @@ struct TaskGroupDetailView: View {
                 }
                 .onDelete { index in
                     groups.tasks.remove(atOffsets: index)
+                    }
                 }
             }
             .navigationTitle(groups.title)
@@ -45,4 +47,4 @@ struct TaskGroupDetailView: View {
             }
         }
     }
-}
+

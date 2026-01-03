@@ -1,7 +1,85 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%lld / %lld Completed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld Completed"
+          }
+        }
+      }
+    },
+    "%lld%%" : {
 
+    },
+    "Add Task" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Group Name" : {
+
+    },
+    "Home" : {
+
+    },
+    "Insert the name of your group" : {
+
+    },
+    "Key" : {
+      "extractionState" : "manual"
+    },
+    "New Group Creator" : {
+
+    },
+    "Save" : {
+
+    },
+    "Select a Group" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select a Group"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccionar Texto"
+          }
+        }
+      }
+    },
+    "Select Icon" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccionar Texto"
+          }
+        }
+      }
+    },
+    "Select the working profile" : {
+
+    },
+    "Task Progress" : {
+
+    },
+    "Task Title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Example title"
+          }
+        }
+      }
+    }
   },
   "version" : "1.0"
 }

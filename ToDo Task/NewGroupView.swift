@@ -11,6 +11,7 @@ struct NewGroupView: View {
     @State private var groupName = ""
     @State private var selectedIcon = "list.bullet"
     let icons = ["list.bullet", "bookmark.fill", "graduationcap.fill", "cart.fill", "house.fill", "heart.fill", "star.fill", "flag.fill"]
+    
     var onSave: (TaskGroup) -> Void
     var body: some View {
         NavigationStack {
@@ -37,13 +38,13 @@ struct NewGroupView: View {
                 }
             }
             .navigationTitle("New Group Creator")
-            .toobar{
+            .toolbar{
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        let newGroup = TaskGroup(title: groupName, symbolNsme: selectedIcon, tasks: [])
+                        let newGroup = TaskGroup(title: groupName, symbolName: selectedIcon, tasks: [])
                         onSave(newGroup)
                         dismiss()
                     }
@@ -52,3 +53,4 @@ struct NewGroupView: View {
         }
     }
 }
+
