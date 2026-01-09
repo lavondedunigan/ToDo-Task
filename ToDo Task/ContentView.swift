@@ -21,9 +21,10 @@ struct ContentView: View {
                 VStack {
                     Text("Select the working profile")
                         .font(.largeTitle.bold())
+                        .accessibilityIdentifier ("ProfileSelector")
                     LazyVGrid(columns: columns, spacing: 20){
                         ForEach($profiles) { $profile in
-                            NavigationLink(value: profile ){
+                            NavigationLink(value: profile ) {
                                 VStack {
                                     Image(profile.profileImage)
                                         .resizable()
@@ -31,8 +32,10 @@ struct ContentView: View {
                                         .frame(width: 80, height: 80)
                                         .clipShape(.circle)
                                     Text(profile.name)
+                                        .font(.title2.bold())
                                 }
                             }
+                            .accessibilityIdentifier("ProfileSelectorName")
                         }
                     }
                 }
@@ -47,6 +50,7 @@ struct ContentView: View {
                 }
             }
         }
+        .preferredColorScheme(isDarkMode ? .dark : .light)
         .onAppear {
             loadData()
         }

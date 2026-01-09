@@ -29,21 +29,25 @@ struct Profile: Identifiable, Hashable, Codable {
 // MOCK DATA
 extension TaskGroup {
     static let sampleData: [TaskGroup] = [
-        TaskGroup(title: "Groceries", symbolName: "storefront.circle.fill", tasks: [
+        TaskGroup(title: "Groceries",
+            symbolName: "storefront.circle.fill",
+            tasks: [
             TaskItem(title: "Buy Apples"),
             TaskItem(title: "Buy Milk")
         ]),
         
-        TaskGroup(title: "Home", symbolName: "house.fill", tasks: [
-            TaskItem(title: "Walk the dog", isCompleted: true ),
-            TaskItem(title: "Clean the kitchen")
+        TaskGroup(title: "Home",
+            symbolName: "house.fill",
+            tasks: [
+                TaskItem(title: "Walk the dog", isCompleted: true ),
+                TaskItem(title: "Clean the kitchen")
         ])
     ]
 }
-
 extension Profile {
     static let sample: [Profile] = [
         Profile(name: "Professor", profileImage: "professor", group: TaskGroup.sampleData),
         Profile(name: "Student", profileImage: "student", group: [])
     ]
 }
+

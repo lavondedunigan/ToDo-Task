@@ -31,6 +31,7 @@ struct TaskGroupDetailView: View {
                         TextField("Task Title", text: $task.title)
                             .strikethrough(task.isCompleted)
                     }
+                    .accessibilityIdentifier("Things That I Have To Do")
                 }
                 .onDelete { index in
                     groups.tasks.remove(atOffsets: index)
@@ -44,6 +45,7 @@ struct TaskGroupDetailView: View {
                         groups.tasks.append(TaskItem(title: ""))
                     }
                 }
+                .accessibilityIdentifier("Check My Emails")
             }
         }
     }
