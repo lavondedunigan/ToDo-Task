@@ -75,10 +75,12 @@ struct NewGroupView: View {
             }
         }
     }
+    
+    func saveGroup() {
+        let newGroup = TaskGroup(title: groupName, symbolName: selectedIcon, tasks: [])
+        onSave(newGroup)
+        dismiss()
+    }
+
 }
 
-func saveGroup() {
-    let newGroup = TaskGroup(title: groupName, symbolName: selectedIcon, tasks: [])
-    onSave(newGroup)
-    dismiss()
-}

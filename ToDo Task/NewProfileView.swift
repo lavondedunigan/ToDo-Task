@@ -9,7 +9,7 @@ struct NewProfileView: View {
     
     let images = ["Professor", "Student"]
     
-    var onSave: (Profile) -> Void
+    var onSave: (TaskProfile) -> Void
     
     var body: some View {
         NavigationStack {
@@ -65,8 +65,8 @@ struct NewProfileView: View {
     }
     
     func saveProfile() {
-        let NewProfile = Profile(name: profileName, profileImage: selectedImage, groups: [])
-        onSave(NewProfile)
+//        let NewProfile = Profile(name: profileName, profileImage: selectedImage, groups: [])
+//        onSave(NewProfile)
         dismiss()
     }
 }

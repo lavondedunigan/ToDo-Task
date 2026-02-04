@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var path = NavigationPath()
     @Environment(\.scenePhase) private var scenePhase
     @AppStorage("isDarkMode") private var isDarkMode = false
+//    @StateObject private var languageManager = LanguageManager()
 
     let saveKey = "savedProfiles"
     let columns = [GridItem(.adaptive(minimum: 150))]
@@ -30,16 +31,8 @@ struct ContentView: View {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach($profiles) { $profile in
                             NavigationLink(value: profile) {
-                                VStack {
-                                    Image(profile.profileImage)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 80, height: 80)
-                                        .clipShape(.circle)
-                                    Text(profile.name)
-                                        .font(.title2.bold())
-                                }
-//                                .accessibilityIdentifier("ProfileSelectorName")
+                                ProfileCardView(profile: profile)
+                                .accessibilityIdentifier("ProfileSelectorName")
 //                                .contextMenu {
 //                                    Button(role: .destructive) {
 //                                        deleteProfile(profile)
@@ -132,7 +125,7 @@ struct ContentView: View {
             }
         }
         // show mock data dev purposes
-        // profiles = Profile.sample
+         profiles = TaskProfile.sample
     }
 
     func deleteProfile(_ profile: TaskProfile) {

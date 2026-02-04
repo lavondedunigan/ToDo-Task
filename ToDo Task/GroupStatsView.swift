@@ -43,8 +43,8 @@ struct GroupStatsView: View {
             
             .frame(maxWidth: .infinity, alignment:  .leading)
             Spacer()
-            Text("Created: \(group.createdAt.formatted(date: .long, time: .omitted))")
-                .accessibilityIdentifier("groupCreatedDate")
+//            Text("Created: \(group.createdAt.formatted(date: .long, time: .omitted))")
+//                .accessibilityIdentifier("groupCreatedDate")
         }
         .padding()
         .background(Color(.secondarySystemBackground))

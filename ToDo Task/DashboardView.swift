@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct DashboardView: View {
-    @Binding var profile: Profile
+    @Binding var profile: TaskProfile
     @State private var selectedGroup: TaskGroup? // selected group
     @State private var columnVisibility: NavigationSplitViewVisibility = .all // navigation side panel
     @State private var isShowingAddGroup = false
@@ -38,7 +38,7 @@ struct DashboardView: View {
                             dismiss()
                         } label: {
                             HStack {
-                                Image(systemName: languageManager.isRTL ? "chevron.right" : "chevron.left")
+                                Image(systemName: languageManager.isRTL ? "chevron.left" : "chevron.right")
                                 Text("Home")
                             }
                         }
@@ -124,11 +124,13 @@ struct DashboardView: View {
                 Text("Upgrade to premium to unlock all features")
             }
         }
+    
+        // MARK: - Actions
+        func deleteGroup(at offsets: IndexSet) {
+            profile.group.remove(atOffsets: offsets)
+        }
+    
     }
     
-    // MARK: - Actions
-    func deleteGroup(at offsets: IndexSet) {
-        profile.groups.remove(atOffsets: offsets)
-    }
-    
+
 
