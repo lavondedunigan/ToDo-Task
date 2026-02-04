@@ -6,10 +6,20 @@
 //
 import Foundation
 
+enum Priority: String, Codable {
+    case high, medium, low
+}
+
 struct TaskItem: Identifiable, Hashable, Codable {
     var id = UUID()
     var title: String
     var isCompleted: Bool = false
+    var dueDate: Date?
+    var isOverdue: Bool {
+        guard let dueDate = dueDate, !isCompleted else { return false }
+        return dueDate < Date()
+    }
+    var priority: Priority = .low
 }
 
 struct TaskGroup: Identifiable, Hashable, Codable {
@@ -17,9 +27,10 @@ struct TaskGroup: Identifiable, Hashable, Codable {
     var title: String
     var symbolName: String
     var tasks: [TaskItem]
+    var createdAt: Date = Date()
 }
 
-struct Profile: Identifiable, Hashable, Codable {
+struct TaskProfile: Identifiable, Hashable, Codable {
     var id = UUID()
     var name:String
     var profileImage: String
@@ -44,10 +55,10 @@ extension TaskGroup {
         ])
     ]
 }
-extension Profile {
-    static let sample: [Profile] = [
-        Profile(name: "Professor", profileImage: "professor", group: TaskGroup.sampleData),
-        Profile(name: "Student", profileImage: "student", group: [])
+extension TaskProfile {
+    static let sample: [TaskProfile] = [
+        TaskProfile(name: "Professor", profileImage: "professor", group: TaskGroup.sampleData),
+        TaskProfile(name: "Student", profileImage: "student", group: [])
     ]
 }
 

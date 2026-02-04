@@ -1,50 +1,72 @@
 import SwiftUI
 
-struct Profile: Identifiable, Codable {
-    let id: UUID
-    var name: String
-    var profileImage: String
-}
-
 struct NewProfileView: View {
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss)  var dismiss
+    @EnvironmentObject var languageManager: LanguageManager
     
-    @State private var name: String = ""
-    @State private var profileImage: String = "person.circle"
+    @State private var profileName  = ""
+    @State private var selectedImage = "person.circle"
     
-    let onCreate: (Profile) -> Void
+    let images = ["Professor", "Student"]
+    
+    var onSave: (Profile) -> Void
     
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("Profile Info")) {
-                    TextField("Name", text: $name)
-                    TextField("Profile Image Name", text: $profileImage)
+                Section("Profile Name") {
+                    TextField("Type the name of the new profile", text: $profileName)
+                        .accessibilityIdentifier("profileNameTextField")
+                }
+                
+                Section("Select Image") {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
+                        ForEach(images, id: \.self) { image in
+                            Image(image)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 80, height: 80)
+                                .padding(6)
+                                .background(selectedImage == image ? Color.cyan.opacity(0.2) : Color.gray.opacity(0.2))
+                                .foregroundStyle(selectedImage == image ? Color.cyan : Color.gray)
+                                .clipShape(.circle)
+                                .onTapGesture {
+                                    selectedImage = image
+                                }
+                                .accessibilityIdentifier("imageSelect_\(image)")
+                        }
+                    }
+                    .padding(.vertical)
                 }
             }
-            .navigationTitle("New Profile")
+            .navigationTitle("New Profile Creator")
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
+                if languageManager.isRTL {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Save") { saveProfile() }
+                            .accessibilityIdentifier("saveProfileButton")
                     }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Create") {
-                        let newProfile = Profile(id: UUID(), name: name, profileImage: profileImage)
-                        onCreate(newProfile)
-                        dismiss()
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") { dismiss() }
+                            .accessibilityIdentifier("cancelProfileButton")
                     }
-                    .disabled(name.isEmpty)
+                } else {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") { dismiss() }
+                            .accessibilityIdentifier("cancelProfileButton")
+                    }
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Save") { saveProfile() }
+                            .accessibilityIdentifier("saveProfileButton")
+                    }
                 }
             }
         }
     }
-}
-
-#Preview {
-    NewProfileView { profile in
-        // Dummy closure for preview
-        print("Created profile: \(profile)")
+    
+    func saveProfile() {
+        let NewProfile = Profile(name: profileName, profileImage: selectedImage, groups: [])
+        onSave(NewProfile)
+        dismiss()
     }
 }

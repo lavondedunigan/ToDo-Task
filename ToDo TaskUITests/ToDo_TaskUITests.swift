@@ -54,4 +54,64 @@ final class ToDo_TaskUITests: XCTestCase {
         }
         
     }
+    // MARK: 117 - 1
+    
+    func testUserFlow() throws {
+        
+        let studentCard = app.buttons["profileCard_Student"] // GIVEN pre existing data
+        XCTAssertTrue(studentCard.waitForExistence(timeout: 5), "The profile of student should exist")
+        studentCard.tap()
+        
+        let addGroupButton = app.buttons["addGroupButton"]
+        XCTAssertTrue(addGroupButton.waitForExistence(timeout: 5), "The add button should be visible on the dashboard")
+        addGroupButton.tap()
+        
+        let groupNameField = app.textFields["groupNameField"]
+        XCTAssertTrue(groupNameField.waitForExistence(timeout: 2), "The Group text field should be present")
+        groupNameField.tap()
+        groupNameField.typeText("Testing Project")
+        // Dismiss keyboard scenario
+        
+        if app.keyboards.buttons["Return"].exists { // if the simulator shows the keyboard
+            app.keyboards.buttons["Return"].tap() // tap return to hide it after I finished typing
+        } else {
+            app.navigationBars["New Group Creator"].tap() // if NO keyboard shows (TODO: add accessibility ID
+        }
+        let iconButton = app.buttons["iconSelect_bookmark.fill"]
+        if iconButton.exists {
+            iconButton.tap()
+        }
+        let saveGroupButton = app.buttons["saveGroupButton"] // ID
+        XCTAssertTrue(saveGroupButton.isHittable, "The save button is available")
+        saveGroupButton.tap()
+        
+        let newGroupRow = app.buttons["groupRow_Testing Project"]
+        XCTAssertTrue(newGroupRow.waitForExistence(timeout: 5), "The Testing Project group should be visible")
+        newGroupRow.tap()
+        
+        let addTaskButton = app.buttons["addTaskButton"]
+        XCTAssertTrue(addTaskButton.waitForExistence(timeout: 5), "The add task button should be visible")
+        addTaskButton.tap()
+        
+        let taskTextField = app.textFields.firstMatch
+        taskTextField.tap()
+        taskTextField.typeText("Finish UI Test")
+    }
+    
+    func testAddTaskButton() throws {
+        app.launchArguments = ["-AppleLanguages", "(en)"]
+        app.launch()
+
+        let firstProfile = app.buttons.matching(identifier: "profileCard_Professor").firstMatch
+        XCTAssertTrue(firstProfile.waitForExistence(timeout: 5))
+        firstProfile.tap()
+
+        let firstGroup = app.buttons.matching(identifier: "groupRow_Groceries").firstMatch
+        XCTAssertTrue(firstGroup.waitForExistence(timeout: 5))
+        firstGroup.tap()
+
+        let addButton = app.buttons.matching(identifier: "addNewTaskButton").firstMatch
+        XCTAssertTrue(addButton.exists, "The add button should be accessible")
+        addButton.tap()
+    }
 }

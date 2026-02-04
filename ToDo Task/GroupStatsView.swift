@@ -28,6 +28,7 @@ struct GroupStatsView: View {
                 Text("\(Int(progress * 100))%")
                     .font(.caption)
                     .bold()
+                    .accessibilityIdentifier("taskProgressPercentage")
             }
             .frame(width: 60, height: 60)
             .padding()
@@ -35,9 +36,15 @@ struct GroupStatsView: View {
             VStack(alignment: .leading) {
                 Text("Task Progress")
                     .font(.headline)
+                    .accessibilityIdentifier("taskProgressTitle")
                 Text("\(completedCount) / \(tasks.count) Completed")
+                    .accessibilityIdentifier("taskProgressCount")
             }
+            
+            .frame(maxWidth: .infinity, alignment:  .leading)
             Spacer()
+            Text("Created: \(group.createdAt.formatted(date: .long, time: .omitted))")
+                .accessibilityIdentifier("groupCreatedDate")
         }
         .padding()
         .background(Color(.secondarySystemBackground))

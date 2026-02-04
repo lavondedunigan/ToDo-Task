@@ -1,13 +1,13 @@
 import SwiftUI
 
-public struct SettingsView: View {
+struct SettingsView: View {
     @AppStorage("notificationsEnabled") private var notificationsEnabled: Bool = true
     @AppStorage("themeSelection") private var themeSelection: Theme = .system
     @AppStorage("languageCode") private var languageCode: String = Locale.current.language.languageCode?.identifier ?? "en"
 
     public init() {}
 
-    public var body: some View {
+    var body: some View {
         List {
             Section("General") {
                 Toggle("Enable Notifications", isOn: $notificationsEnabled)
